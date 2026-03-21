@@ -10,11 +10,9 @@
     </parent>
 
     <artifactId>stats-dto</artifactId>
-    <packaging>pom</packaging>
 
     <properties>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
     </properties>
 
 </project>
