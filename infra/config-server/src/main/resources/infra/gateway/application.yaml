@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    gateway:
+      discovery.locator.enabled: true
+      routes:
+        - id: ewm_service
+          uri: lb://ewm-service
+          predicates:
+            - Path=/ewm/**
+          filters:
+            - PrefixPath=/api/v1
+
+        - id: stats_server
+          uri: lb://stats-server
+          predicates:
+            - Path=/stats/**
+          filters:
+            - PrefixPath=/api/v1
+            - name: Retry
+              args:
+                retries: 3
+                statuses: NOT_FOUND
+                backoff:
+                  firstBackoff: 100ms
+                  maxBackoff: 2000ms
+                  factor: 2
+                  basedOnPreviousValue: false
+
+
+server:
+  port: 8080
