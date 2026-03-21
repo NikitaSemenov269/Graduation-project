@@ -10,11 +10,7 @@
     </parent>
 
     <artifactId>common</artifactId>
-
-    <properties>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>
+    <packaging>pom</packaging>
 
     <dependencies>
         <!-- Spring Web для @RestControllerAdvice -->
