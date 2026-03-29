@@ -13,9 +13,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>common</module>
         <module>ewm</module>
         <module>stats</module>
+        <module>interaction-api</module>
     </modules>
 
 <!--   ДОБАВИТЬ ЗАВИСИМОСТЬ ДЛЯ DTO -->
