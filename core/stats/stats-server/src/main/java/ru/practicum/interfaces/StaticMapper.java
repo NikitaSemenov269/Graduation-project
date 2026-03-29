@@ -3,10 +3,9 @@ package ru.practicum.interfaces;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import ru.practicum.RequestStatisticDto;
-import ru.practicum.ResponseStatisticDto;
+import ru.practicum.DTO.RequestStatisticDto;
+import ru.practicum.DTO.ResponseStatisticDto;
 import ru.practicum.stats.Hit;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

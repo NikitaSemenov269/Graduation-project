@@ -24,7 +24,7 @@ import ru.practicum.model.Event;
 
 import ru.practicum.model.QCompilation;
 import ru.practicum.model.QEvent;
-import ru.practicum.repository.EventRepository;
+import ru.practicum.interfaces.EventRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -3,7 +3,7 @@ package ru.practicum.interfaces;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ru.practicum.ResponseStatisticDto;
+import ru.practicum.DTO.ResponseStatisticDto;
 import ru.practicum.stats.Hit;
 
 import java.time.LocalDateTime;

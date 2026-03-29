@@ -38,7 +38,7 @@ public class Compilation {
     /**
      * События, входящие в подборку
      */
-
+    // Нужно заменить тип связи !!!
     @ManyToMany
     @JoinTable(
             name = "compilation_events",

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import ru.practicum.DTO.location.LocationDto;
 import ru.practicum.DTO.category.CategoryDto;
 import ru.practicum.DTO.user.UserShortDto;
-import ru.practicum.enumeration.EventState;
+import ru.practicum.enums.EventState;
 
 import java.time.LocalDateTime;
 

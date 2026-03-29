@@ -15,6 +15,9 @@
     <modules>
         <module>category</module>
         <module>compilation</module>
+        <module>event</module>
+        <module>request</module>
+        <module>user</module>
     </modules>
 
     <properties>

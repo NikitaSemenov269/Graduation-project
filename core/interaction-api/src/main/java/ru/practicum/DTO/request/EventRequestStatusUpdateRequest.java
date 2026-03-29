@@ -6,7 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.enumeration.ParticipationStatus;
+import ru.practicum.enums.ParticipationStatus;
+
 
 import java.util.List;
 
