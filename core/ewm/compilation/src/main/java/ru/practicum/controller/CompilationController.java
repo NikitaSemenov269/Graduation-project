@@ -5,9 +5,10 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.dto.compilation.CompilationDto;
+import ru.practicum.DTO.compilation.CompilationDto;
 import ru.practicum.service.CompilationService;
 
 
@@ -20,13 +21,14 @@ public class CompilationController {
     private final CompilationService compServ;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<CompilationDto>> findCompilations(
             @RequestParam(required = false) Boolean pinned,
             @RequestParam(defaultValue = "0") @Min(0) Integer from,
             @RequestParam(defaultValue = "10") @Min(1) Integer size) {
 
         Pageable pageable = PageRequest.of(from / size, size);
-        return ResponseEntity.ok().body(compServ.findCompilations(pinned, pageable));
+        return compServ.findCompilations(pinned, pageable);
     }
 
     @GetMapping("/{compId}")

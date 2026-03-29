@@ -18,8 +18,6 @@
         <module>interaction-api</module>
     </modules>
 
-<!--   ДОБАВИТЬ ЗАВИСИМОСТЬ ДЛЯ DTO -->
-
     <dependencies>
         <!--  Eureka Client -->
         <dependency>

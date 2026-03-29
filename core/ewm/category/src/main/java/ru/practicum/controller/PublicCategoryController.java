@@ -2,8 +2,10 @@ package ru.practicum.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.dto.category.CategoryDto;
+import ru.practicum.DTO.category.CategoryDto;
+import ru.practicum.api.PublicCategoryApi;
 import ru.practicum.service.CategoryService;
 
 import java.util.List;
@@ -11,11 +13,12 @@ import java.util.List;
 /**
  * Контроллер для публичного доступа к категориям
  */
+@Validated
 @RestController
 @RequestMapping("/categories")
 @RequiredArgsConstructor
 @Slf4j
-public class PublicCategoryController {
+public class PublicCategoryController implements PublicCategoryApi {
 
     private final CategoryService categoryService;
 
@@ -23,6 +26,7 @@ public class PublicCategoryController {
      * Получение категорий
      * GET /categories
      */
+    @Override
     @GetMapping
     public List<CategoryDto> getCategories(@RequestParam(defaultValue = "0") Integer from,
                                            @RequestParam(defaultValue = "10") Integer size) {
@@ -34,6 +38,7 @@ public class PublicCategoryController {
      * Получение информации о категории по её идентификатору
      * GET /categories/{catId}
      */
+    @Override
     @GetMapping("/{catId}")
     public CategoryDto getCategoryById(@PathVariable Long catId) {
         log.info("GET /categories/{} - получение категории по ID", catId);

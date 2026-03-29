@@ -8,9 +8,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.dto.compilation.CompilationDto;
-import ru.practicum.dto.compilation.NewCompilationDto;
-import ru.practicum.dto.compilation.UpdateCompilationRequest;
+
+import ru.practicum.DTO.compilation.CompilationDto;
+import ru.practicum.DTO.compilation.NewCompilationDto;
+import ru.practicum.DTO.compilation.UpdateCompilationRequest;
 import ru.practicum.exception.BadRequestException;
 import ru.practicum.exception.ConflictException;
 import ru.practicum.exception.NotFoundException;

@@ -5,10 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.dto.category.CategoryDto;
-import ru.practicum.dto.category.NewCategoryDto;
+import ru.practicum.DTO.category.CategoryDto;
+import ru.practicum.DTO.category.NewCategoryDto;
+import ru.practicum.api.AdminCategoryApi;
 import ru.practicum.exception.BadRequestException;
 import ru.practicum.exception.ConflictException;
 import ru.practicum.exception.NotFoundException;
@@ -17,19 +18,21 @@ import ru.practicum.service.CategoryService;
 /**
  * Контроллер для управления категориями администратором
  */
+@Validated
 @RestController
 @RequestMapping("/admin/categories")
 @RequiredArgsConstructor
 @Slf4j
-public class AdminCategoryController {
+public class AdminCategoryController implements AdminCategoryApi {
 
+    // ВНЕДРИТЬ ИНТЕРФЕЙСЫ СЕРВИСОВ
     private final CategoryService categoryService;
 
     /**
      * Добавление новой категории
      * POST /admin/categories
      */
-    @PostMapping
+    @Override
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryDto addCategory(@Valid @RequestBody NewCategoryDto newCategoryDto) {
         log.info("POST /admin/categories - добавление новой категории: {}", newCategoryDto.getName());
@@ -40,13 +43,13 @@ public class AdminCategoryController {
      * Удаление категории
      * DELETE /admin/categories/{catId}
      */
+    @Override
     @DeleteMapping("/{catId}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long catId) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCategory(@PathVariable Long catId) {
         log.info("DELETE /admin/categories/{} - удаление категории", catId);
-
         try {
             categoryService.deleteCategory(catId);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
         } catch (DataIntegrityViolationException e) {
             String errorMsg = e.getMessage();
@@ -75,7 +78,7 @@ public class AdminCategoryController {
             throw e;
 
         } catch (NotFoundException e) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("FFFFFFFFFFFFFFFFFF");
 
         } catch (IllegalArgumentException e) {
             throw new BadRequestException(
@@ -85,22 +88,21 @@ public class AdminCategoryController {
         }
     }
 
-
     /**
      * Изменение категории
      * PATCH /admin/categories/{catId}
      */
+    @Override
     @PatchMapping("/{catId}")
-    public ResponseEntity<CategoryDto> updateCategory(
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryDto updateCategory(
             @PathVariable Long catId,
             @Valid @RequestBody CategoryDto categoryDto) {
 
         log.info("PATCH /admin/categories/{} - обновление категории", catId);
 
         try {
-            CategoryDto updatedCategory = categoryService.updateCategory(catId, categoryDto);
-            return ResponseEntity.ok(updatedCategory);
-
+            return categoryService.updateCategory(catId, categoryDto);
         } catch (DataIntegrityViolationException e) {
             String errorMsg = e.getMessage();
 
@@ -140,7 +142,7 @@ public class AdminCategoryController {
             throw e;
 
         } catch (NotFoundException e) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("FFFFFFFFFFFFFFFF");
 
         } catch (IllegalArgumentException e) {
             throw new BadRequestException(
@@ -148,5 +150,4 @@ public class AdminCategoryController {
             );
         }
     }
-
 }
