@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.practicum</groupId>
-        <artifactId>Graduation-project</artifactId>
+        <artifactId>graduation-project</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -14,13 +14,11 @@
     <modules>
         <module>config-server</module>
         <module>discovery-server</module>
-        <module>gateway</module>
+        <module>gateway-server</module>
     </modules>
 
     <properties>
         <spring-boot.version>3.1.5</spring-boot.version>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <build>

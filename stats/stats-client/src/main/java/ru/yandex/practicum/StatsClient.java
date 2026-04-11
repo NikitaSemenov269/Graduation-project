@@ -1,7 +1,9 @@
 package ru.yandex.practicum;
 
-import ru.yandex.practicum.dto.stats.EndpointHitDto;
-import ru.yandex.practicum.dto.stats.ViewStatsDto;
+
+
+import ru.yandex.practicum.DTO.stats.EndpointHitDto;
+import ru.yandex.practicum.DTO.stats.ViewStatsDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
