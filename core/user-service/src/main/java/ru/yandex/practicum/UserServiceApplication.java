@@ -1,4 +1,4 @@
-package ru.yandex.practicum.user;
+package ru.yandex.practicum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"ru.yandex.practicum.user", "ru.yandex.practicum.exception"})
 public class UserServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ru.yandex.practicum.user.UserServiceApplication.class, args);
+        SpringApplication.run(UserServiceApplication.class, args);
     }
 }

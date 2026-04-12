@@ -4,13 +4,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.DTO.category.CategoryDto;
 import ru.yandex.practicum.DTO.category.NewCategoryDto;
 import ru.yandex.practicum.interfaces.CategoryService;
 
-@Validated
 @Slf4j
 @RestController
 @RequiredArgsConstructor

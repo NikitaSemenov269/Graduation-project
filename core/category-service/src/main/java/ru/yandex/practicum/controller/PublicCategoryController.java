@@ -6,14 +6,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.DTO.category.CategoryDto;
 import ru.yandex.practicum.interfaces.CategoryService;
 import java.util.List;
 import java.util.Map;
 
-@Validated
 @Slf4j
 @RestController
 @RequiredArgsConstructor
