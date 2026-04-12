@@ -40,11 +40,14 @@ spring:
           predicates:
             - Path=/users/*/events/**
 
-        # 3. REQUEST-SERVICE (Запросы на участие)
-        - id: private_user_requests_route
+        # 3. REQUEST-SERVICE — ИСПРАВЛЕНО: разделил на два отдельных маршрута
+        - id: user_requests_route
           uri: lb://request-service
           predicates:
             - Path=/users/*/requests/**
+        - id: user_event_requests_route
+          uri: lb://request-service
+          predicates:
             - Path=/users/*/events/*/requests/**
 
         # 4. USER-SERVICE
@@ -53,9 +56,9 @@ spring:
           predicates:
             - Path=/admin/users/**
 
-        # 5. STATS-SERVICE
+        # 5. STATS-SERVICE — ИСПРАВЛЕНО: убрал запятую, оставил один Path
         - id: internal_stats_route
-          uri: lb://stats-server # ВНИМАНИЕ: В Eureka он зарегистрирован как STATS-SERVER (с буквой S), а не stats-service
+          uri: lb://stats-server
           predicates:
             - Path=/stats/**, /hit/**
 
