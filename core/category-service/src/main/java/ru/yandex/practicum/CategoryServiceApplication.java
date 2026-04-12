@@ -10,8 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "ru.yandex.practicum.client")
 @ComponentScan(basePackages = {"ru.yandex.practicum", "ru.yandex.practicum.client"})
-public class EventApp {
+public class CategoryServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EventApp.class, args);
+        SpringApplication.run(CategoryServiceApplication.class, args);
     }
 }

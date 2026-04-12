@@ -1,4 +1,5 @@
-package ru.yandex.practicum;
+package ru.yandex.practicum.request;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +15,8 @@ import org.springframework.context.annotation.ComponentScan;
         "ru.yandex.practicum.client",
         "ru.yandex.practicum.exception"
 })
-public class RequestServiceApp {
+public class RequestServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RequestServiceApp.class, args);
+        SpringApplication.run(ru.yandex.practicum.request.RequestServiceApplication.class, args);
     }
 }
