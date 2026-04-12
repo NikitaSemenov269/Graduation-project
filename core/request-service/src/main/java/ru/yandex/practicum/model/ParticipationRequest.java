@@ -24,10 +24,10 @@ public class ParticipationRequest {
     @Column(nullable = false)
     LocalDateTime created;
 
-    @JoinColumn(name = "event_id", nullable = false)
+    @Column(name = "event_id", nullable = false)
     Long event;
 
-    @JoinColumn(name = "requester_id", nullable = false)
+    @Column(name = "requester_id", nullable = false)
     Long requester;
 
     @Enumerated(EnumType.STRING)
