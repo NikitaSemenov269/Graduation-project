@@ -53,6 +53,7 @@ public class StatsServiceImpl implements StatsService {
         return stats;
     }
 
+
     private void validateDateRange(LocalDateTime start, LocalDateTime end) {
         if (end.isBefore(start)) {
             log.error("Некорректный диапазон: start={}, end={}", start, end);

@@ -1,4 +1,4 @@
-package ru.yandex.practicum.stats;
+package ru.yandex.practicum.service;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
