@@ -8,7 +8,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = {"ru.yandex.request", "ru.yandex.practicum"})
+@ComponentScan(basePackages = {
+        "ru.yandex.request",
+        "ru.yandex.practicum",
+        "ru.yandex.practicum.client",
+        "ru.yandex.practicum.exception"})
 @EnableFeignClients(basePackages = "ru.yandex.practicum.client")
 public class RequestServiceApplication {
     public static void main(String[] args) {

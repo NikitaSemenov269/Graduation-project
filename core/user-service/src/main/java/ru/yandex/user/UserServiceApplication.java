@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "ru.yandex.practicum.client")
-@ComponentScan(basePackages = {"ru.yandex.user", "ru.yandex.practicum"})
+@ComponentScan(basePackages = {"ru.yandex.user", "ru.yandex.practicum", "ru.yandex.practicum.client"})
 public class UserServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
