@@ -40,7 +40,7 @@ spring:
           predicates:
             - Path=/users/*/events/**
 
-        # 3. REQUEST-SERVICE — ИСПРАВЛЕНО: отдельные маршруты без /**/ в середине
+        # 3. REQUEST-SERVICE
         - id: user_requests_route
           uri: lb://request-service
           predicates:
@@ -52,9 +52,9 @@ spring:
         - id: user_event_requests_route
           uri: lb://request-service
           predicates:
-            - Path=/users/*/events/*/requests, /users/*/events/*/requests/*
+            - Path=/users/*/events/*/requests/**
 
-        # 4. USER-SERVICE
+          # 4. USER-SERVICE
         - id: admin_users_route
           uri: lb://user-service
           predicates:

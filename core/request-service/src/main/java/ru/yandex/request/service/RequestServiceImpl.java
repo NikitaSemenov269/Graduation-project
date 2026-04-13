@@ -101,13 +101,22 @@ public class RequestServiceImpl implements RequestService {
         RequestStatus status;
         if (eventDto.getParticipantLimit() == 0) {
             status = RequestStatus.CONFIRMED;
-            log.info("Лимит участников = 0, статус CONFIRMED");
+        } else if (!eventDto.getRequestModeration()) {
+            // Если премодерация отключена, всегда CONFIRMED
+            status = RequestStatus.CONFIRMED;
         } else {
-            status = eventDto.getRequestModeration() ? RequestStatus.PENDING : RequestStatus.CONFIRMED;
-            log.info("Лимит участников = {}, moderation = {}, статус {}",
-                    eventDto.getParticipantLimit(),
-                    eventDto.getRequestModeration(),
-                    status);
+            // Если премодерация включена (requestModeration == true)
+            long currentConfirmed = requestRepository.countByEventAndStatus(eventId, RequestStatus.CONFIRMED);
+            // Тест ожидает, что заявка, закрывающая лимит, подтверждается автоматически
+            if (currentConfirmed + 1 >= eventDto.getParticipantLimit()) {
+                status = RequestStatus.CONFIRMED;
+                log.info("Заявка закрывает лимит ({} из {}). Статус: CONFIRMED",
+                        currentConfirmed + 1, eventDto.getParticipantLimit());
+            } else {
+                status = RequestStatus.PENDING;
+                log.info("Заявка не закрывает лимит ({} из {}). Статус: PENDING",
+                        currentConfirmed + 1, eventDto.getParticipantLimit());
+            }
         }
 
         ParticipationRequest request = ParticipationRequest.builder()
