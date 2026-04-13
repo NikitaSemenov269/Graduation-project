@@ -27,6 +27,6 @@ eureka:
 
 logging:
   level:
-    org.springframework.web: DEBUG
+    org.springframework.web: TRACE
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
-    ru.yandex.practicum: DEBUG
+    ru.yandex.request: TRACE
