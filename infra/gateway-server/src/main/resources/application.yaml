@@ -13,68 +13,6 @@ spring:
         max-attempts: 10
         initial-interval: 2000
         multiplier: 1.5
-    gateway:
-      discovery:
-        locator:
-          enabled: false
-      routes:
-        # 1. CATEGORY-SERVICE
-        - id: public_categories_route
-          uri: lb://category-service
-          predicates:
-            - Path=/categories/**
-        - id: admin_categories_route
-          uri: lb://category-service
-          predicates:
-            - Path=/admin/categories/**
-
-        # 2. EVENT-SERVICE (События и Подборки)
-        - id: public_compilations_route
-          uri: lb://event-service
-          predicates:
-            - Path=/compilations/**
-        - id: admin_compilations_route
-          uri: lb://event-service
-          predicates:
-            - Path=/admin/compilations/**
-        - id: public_events_route
-          uri: lb://event-service
-          predicates:
-            - Path=/events/**
-        - id: admin_events_route
-          uri: lb://event-service
-          predicates:
-            - Path=/admin/events/**
-        - id: private_user_events_route
-          uri: lb://event-service
-          predicates:
-            - Path=/users/*/events/**
-
-        # 3. REQUEST-SERVICE
-        - id: user_requests_route
-          uri: lb://request-service
-          predicates:
-            - Path=/users/*/requests, /users/*/requests/*
-        - id: user_requests_cancel_route
-          uri: lb://request-service
-          predicates:
-            - Path=/users/*/requests/*/cancel
-        - id: user_event_requests_route
-          uri: lb://request-service
-          predicates:
-            - Path=/users/*/events/*/requests, /users/*/events/*/requests/*
-
-        # 4. USER-SERVICE
-        - id: admin_users_route
-          uri: lb://user-service
-          predicates:
-            - Path=/admin/users/**
-
-        # 5. STATS-SERVICE
-        - id: internal_stats_route
-          uri: lb://stats-server
-          predicates:
-            - Path=/stats/**, /hit/**
 
 eureka:
   client:
@@ -94,7 +32,3 @@ management:
   endpoint:
     gateway:
       enabled: true
-
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
