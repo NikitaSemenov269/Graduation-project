@@ -307,7 +307,7 @@ services:
     container_name: request-service
     restart: unless-stopped
     ports:
-      - "8084:8084"
+      - "8085:8084"
     depends_on:
       request-db:
         condition: service_healthy
