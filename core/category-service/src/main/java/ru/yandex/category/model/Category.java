@@ -1,4 +1,4 @@
-package ru.yandex.practicum.model;
+package ru.yandex.category.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

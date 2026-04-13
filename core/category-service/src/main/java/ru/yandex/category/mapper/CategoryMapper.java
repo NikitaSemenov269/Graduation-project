@@ -1,9 +1,10 @@
-package ru.yandex.practicum.mapper;
+package ru.yandex.category.mapper;
 
 import org.mapstruct.Mapper;
+import ru.yandex.category.model.Category;
 import ru.yandex.practicum.DTO.category.CategoryDto;
 import ru.yandex.practicum.DTO.category.NewCategoryDto;
-import ru.yandex.practicum.model.Category;
+
 import java.util.List;
 
 @Mapper(componentModel = "spring")

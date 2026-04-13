@@ -1,4 +1,4 @@
-package ru.yandex.practicum.service;
+package ru.yandex.category.service;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -8,15 +8,16 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.yandex.category.interfaces.CategoryRepository;
+import ru.yandex.category.interfaces.CategoryService;
+import ru.yandex.category.mapper.CategoryMapper;
+import ru.yandex.category.model.Category;
 import ru.yandex.practicum.DTO.category.CategoryDto;
 import ru.yandex.practicum.DTO.category.NewCategoryDto;
 import ru.yandex.practicum.client.event.EventServiceClient;
 import ru.yandex.practicum.exception.ConflictException;
 import ru.yandex.practicum.exception.NotFoundException;
-import ru.yandex.practicum.interfaces.CategoryService;
-import ru.yandex.practicum.mapper.CategoryMapper;
-import ru.yandex.practicum.model.Category;
-import ru.yandex.practicum.interfaces.CategoryRepository;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

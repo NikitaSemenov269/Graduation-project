@@ -1,4 +1,4 @@
-package ru.yandex.practicum.controller;
+package ru.yandex.category.controller;
 
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -7,8 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.category.interfaces.CategoryService;
 import ru.yandex.practicum.DTO.category.CategoryDto;
-import ru.yandex.practicum.interfaces.CategoryService;
+
 import java.util.List;
 import java.util.Map;
 

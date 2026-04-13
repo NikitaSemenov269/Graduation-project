@@ -1,13 +1,14 @@
-package ru.yandex.practicum.controller;
+package ru.yandex.category.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.category.interfaces.CategoryService;
 import ru.yandex.practicum.DTO.category.CategoryDto;
 import ru.yandex.practicum.DTO.category.NewCategoryDto;
-import ru.yandex.practicum.interfaces.CategoryService;
+
 
 @Slf4j
 @RestController

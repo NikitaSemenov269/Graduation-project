@@ -1,4 +1,4 @@
-package ru.yandex.practicum.interfaces;
+package ru.yandex.category.interfaces;
 
 import org.springframework.data.domain.Pageable;
 import ru.yandex.practicum.DTO.category.CategoryDto;
