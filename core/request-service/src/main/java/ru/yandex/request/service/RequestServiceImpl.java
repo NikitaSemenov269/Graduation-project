@@ -90,24 +90,15 @@ public class RequestServiceImpl implements RequestService {
             throw new ConflictException("Нельзя добавить повторный запрос");
         }
 
-        if (eventDto.getParticipantLimit() > 0) {
-            int confirmed = requestRepository.countByEventAndStatus(eventId, RequestStatus.CONFIRMED);
-            if (confirmed >= eventDto.getParticipantLimit()) {
-                log.error("Лимит участников исчерпан");
-                throw new ConflictException("Достигнут лимит запросов на участие");
-            }
-        }
-
         RequestStatus status;
         if (eventDto.getParticipantLimit() == 0) {
             status = RequestStatus.CONFIRMED;
+            log.info("Лимит участников = 0, статус CONFIRMED");
         } else if (!eventDto.getRequestModeration()) {
-            // Если премодерация отключена, всегда CONFIRMED
             status = RequestStatus.CONFIRMED;
+            log.info("Премодерация отключена, статус CONFIRMED");
         } else {
-            // Если премодерация включена (requestModeration == true)
-            long currentConfirmed = requestRepository.countByEventAndStatus(eventId, RequestStatus.CONFIRMED);
-            // Тест ожидает, что заявка, закрывающая лимит, подтверждается автоматически
+            int currentConfirmed = requestRepository.countByEventAndStatus(eventId, RequestStatus.CONFIRMED);
             if (currentConfirmed + 1 >= eventDto.getParticipantLimit()) {
                 status = RequestStatus.CONFIRMED;
                 log.info("Заявка закрывает лимит ({} из {}). Статус: CONFIRMED",
@@ -116,6 +107,14 @@ public class RequestServiceImpl implements RequestService {
                 status = RequestStatus.PENDING;
                 log.info("Заявка не закрывает лимит ({} из {}). Статус: PENDING",
                         currentConfirmed + 1, eventDto.getParticipantLimit());
+            }
+        }
+
+        if (status == RequestStatus.CONFIRMED && eventDto.getParticipantLimit() > 0) {
+            int confirmed = requestRepository.countByEventAndStatus(eventId, RequestStatus.CONFIRMED);
+            if (confirmed >= eventDto.getParticipantLimit()) {
+                log.error("Лимит участников исчерпан на момент сохранения");
+                throw new ConflictException("Достигнут лимит запросов на участие");
             }
         }
 

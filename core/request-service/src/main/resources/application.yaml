@@ -30,3 +30,9 @@ logging:
     org.springframework.web: TRACE
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
     ru.yandex.request: TRACE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: mappings
