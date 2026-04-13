@@ -41,14 +41,10 @@ spring:
             - Path=/users/*/events/**
 
         # 3. REQUEST-SERVICE — ИСПРАВЛЕНО: добавлены пути без /** в конце
-        - id: user_requests_route
+        - id: request_service_all
           uri: lb://request-service
           predicates:
-            - Path=/users/*/requests, /users/*/requests/*
-        - id: user_event_requests_route
-          uri: lb://request-service
-          predicates:
-            - Path=/users/*/events/*/requests, /users/*/events/*/requests/*
+            - Path=/users/**/requests, /users/**/requests/**
 
         # 4. USER-SERVICE
         - id: admin_users_route
