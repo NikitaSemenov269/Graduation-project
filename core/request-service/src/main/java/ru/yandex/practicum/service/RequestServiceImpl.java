@@ -70,6 +70,11 @@ public class RequestServiceImpl implements RequestService {
             throw new RuntimeException("Ошибка при проверке события", e);
         }
 
+        if (eventDto.getInitiator() == null || eventDto.getInitiator().getId() == null) {
+            log.error("У события {} не заполнен инициатор", eventId);
+            throw new IllegalStateException("Некорректные данные события");
+        }
+
         if (eventDto.getInitiator().getId().equals(userId)) {
             log.error("Инициатор не может подать заявку");
             throw new ConflictException("Инициатор события не может добавить запрос на участие");
@@ -173,6 +178,11 @@ public class RequestServiceImpl implements RequestService {
             throw new RuntimeException("Ошибка при проверке события", e);
         }
 
+        if (eventDto.getInitiator() == null || eventDto.getInitiator().getId() == null) {
+            log.error("У события {} не заполнен инициатор", eventId);
+            throw new IllegalStateException("Некорректные данные события");
+        }
+
         if (!eventDto.getInitiator().getId().equals(userId)) {
             log.error("Доступ запрещен");
             throw new NotFoundException("Событие с id=" + eventId + " не найдено");
@@ -196,6 +206,11 @@ public class RequestServiceImpl implements RequestService {
         } catch (FeignException e) {
             log.error("Ошибка при обращении к event-service: {}", e.getMessage());
             throw new RuntimeException("Ошибка при проверке события", e);
+        }
+
+        if (eventDto.getInitiator() == null || eventDto.getInitiator().getId() == null) {
+            log.error("У события {} не заполнен инициатор", eventId);
+            throw new IllegalStateException("Некорректные данные события");
         }
 
         if (!eventDto.getInitiator().getId().equals(userId)) {
