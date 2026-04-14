@@ -46,6 +46,9 @@ public class RequestServiceImpl implements RequestService {
     @Override
     @Transactional
     public ParticipationRequestDto createRequest(Long userId, Long eventId) {
+        if (eventId == null) {
+            throw new IllegalArgumentException("eventId не может быть null");
+        }
         log.info("Создание запроса: user={}, event={}", userId, eventId);
 
         UserDto userDto;
