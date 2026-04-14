@@ -70,11 +70,6 @@ public class RequestServiceImpl implements RequestService {
             throw new RuntimeException("Ошибка при проверке события", e);
         }
 
-        if (eventDto.getInitiator() == null || eventDto.getInitiator().getId() == null) {
-            log.error("У события {} не заполнен инициатор", eventId);
-            throw new IllegalStateException("Некорректные данные события");
-        }
-
         if (eventDto.getInitiator().getId().equals(userId)) {
             log.error("Инициатор не может подать заявку");
             throw new ConflictException("Инициатор события не может добавить запрос на участие");
@@ -90,32 +85,24 @@ public class RequestServiceImpl implements RequestService {
             throw new ConflictException("Нельзя добавить повторный запрос");
         }
 
+        if (eventDto.getParticipantLimit() > 0) {
+            int confirmed = requestRepository.countByEventAndStatus(eventId, RequestStatus.CONFIRMED);
+            if (confirmed >= eventDto.getParticipantLimit()) {
+                log.error("Лимит участников исчерпан");
+                throw new ConflictException("Достигнут лимит запросов на участие");
+            }
+        }
+
         RequestStatus status;
         if (eventDto.getParticipantLimit() == 0) {
             status = RequestStatus.CONFIRMED;
             log.info("Лимит участников = 0, статус CONFIRMED");
-        } else if (!eventDto.getRequestModeration()) {
-            status = RequestStatus.CONFIRMED;
-            log.info("Премодерация отключена, статус CONFIRMED");
         } else {
-            int currentConfirmed = requestRepository.countByEventAndStatus(eventId, RequestStatus.CONFIRMED);
-            if (currentConfirmed + 1 >= eventDto.getParticipantLimit()) {
-                status = RequestStatus.CONFIRMED;
-                log.info("Заявка закрывает лимит ({} из {}). Статус: CONFIRMED",
-                        currentConfirmed + 1, eventDto.getParticipantLimit());
-            } else {
-                status = RequestStatus.PENDING;
-                log.info("Заявка не закрывает лимит ({} из {}). Статус: PENDING",
-                        currentConfirmed + 1, eventDto.getParticipantLimit());
-            }
-        }
-
-        if (status == RequestStatus.CONFIRMED && eventDto.getParticipantLimit() > 0) {
-            int confirmed = requestRepository.countByEventAndStatus(eventId, RequestStatus.CONFIRMED);
-            if (confirmed >= eventDto.getParticipantLimit()) {
-                log.error("Лимит участников исчерпан на момент сохранения");
-                throw new ConflictException("Достигнут лимит запросов на участие");
-            }
+            status = eventDto.getRequestModeration() ? RequestStatus.PENDING : RequestStatus.CONFIRMED;
+            log.info("Лимит участников = {}, moderation = {}, статус {}",
+                    eventDto.getParticipantLimit(),
+                    eventDto.getRequestModeration(),
+                    status);
         }
 
         ParticipationRequest request = ParticipationRequest.builder()
@@ -177,18 +164,13 @@ public class RequestServiceImpl implements RequestService {
 
         EventFullDto eventDto;
         try {
-            eventDto = eventClient.getInternalEvent(eventId);
+            eventDto = eventClient.getEvent(eventId);
         } catch (FeignException.NotFound e) {
             log.error("Событие с id {} не найдено", eventId);
             throw new NotFoundException("Событие с id=" + eventId + " не найдено");
         } catch (FeignException e) {
             log.error("Ошибка при обращении к event-service: {}", e.getMessage());
             throw new RuntimeException("Ошибка при проверке события", e);
-        }
-
-        if (eventDto.getInitiator() == null || eventDto.getInitiator().getId() == null) {
-            log.error("У события {} не заполнен инициатор", eventId);
-            throw new IllegalStateException("Некорректные данные события");
         }
 
         if (!eventDto.getInitiator().getId().equals(userId)) {
@@ -207,18 +189,13 @@ public class RequestServiceImpl implements RequestService {
 
         EventFullDto eventDto;
         try {
-            eventDto = eventClient.getInternalEvent(eventId);
+            eventDto = eventClient.getEvent(eventId);
         } catch (FeignException.NotFound e) {
             log.error("Событие с id {} не найдено", eventId);
             throw new NotFoundException("Событие с id=" + eventId + " не найдено");
         } catch (FeignException e) {
             log.error("Ошибка при обращении к event-service: {}", e.getMessage());
             throw new RuntimeException("Ошибка при проверке события", e);
-        }
-
-        if (eventDto.getInitiator() == null || eventDto.getInitiator().getId() == null) {
-            log.error("У события {} не заполнен инициатор", eventId);
-            throw new IllegalStateException("Некорректные данные события");
         }
 
         if (!eventDto.getInitiator().getId().equals(userId)) {

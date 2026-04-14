@@ -1,7 +1,6 @@
 package ru.yandex.request.interfaces;
 
 
-
 import ru.yandex.practicum.DTO.request.EventRequestStatusUpdateRequest;
 import ru.yandex.practicum.DTO.request.EventRequestStatusUpdateResult;
 import ru.yandex.practicum.DTO.request.ParticipationRequestDto;
