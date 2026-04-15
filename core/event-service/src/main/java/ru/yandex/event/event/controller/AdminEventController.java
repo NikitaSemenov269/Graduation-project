@@ -16,7 +16,6 @@ import ru.yandex.practicum.DTO.event.EventState;
 import ru.yandex.practicum.DTO.event.UpdateEventAdminRequest;
 import ru.yandex.event.event.interfaces.EventService;
 
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -30,7 +29,7 @@ import java.util.stream.Collectors;
 public class AdminEventController {
 
     EventService eventService;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @GetMapping
     public List<EventFullDto> getEvents(

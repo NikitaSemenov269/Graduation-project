@@ -1,9 +1,7 @@
 package ru.yandex.practicum.DTO.location;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 /**
  * Широта и долгота места проведения события
@@ -12,15 +10,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class LocationDto {
 
     /**
      * Широта
      */
-    private Float lat;
+    Float lat;
 
     /**
      * Долгота
      */
-    private Float lon;
+    Float lon;
 }

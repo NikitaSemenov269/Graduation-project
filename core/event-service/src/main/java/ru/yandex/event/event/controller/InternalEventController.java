@@ -1,6 +1,8 @@
 package ru.yandex.event.event.controller;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +19,12 @@ import ru.yandex.event.event.interfaces.EventService;
 @RequestMapping("/internal/events")
 @RequiredArgsConstructor
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class InternalEventController {
 
-    private final EventService eventService;
-    private final CategoryServiceClient categoryClient;
-    private final UserServiceClient userClient;
+    EventService eventService;
+    CategoryServiceClient categoryClient;
+    UserServiceClient userClient;
 
     @GetMapping("/{id}")
     public EventFullDto getInternalEvent(@PathVariable Long id) {

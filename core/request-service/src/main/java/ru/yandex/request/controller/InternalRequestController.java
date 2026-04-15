@@ -1,6 +1,8 @@
 package ru.yandex.request.controller;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.request.interfaces.RequestService;
@@ -12,9 +14,10 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/internal")
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class InternalRequestController {
 
-    private final RequestService requestService;
+    RequestService requestService;
 
     @GetMapping("/events/{eventId}/confirmed-requests")
     public Long getConfirmedRequests(@PathVariable Long eventId) {

@@ -2,7 +2,9 @@ package ru.yandex.category.controller;
 
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +19,10 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/categories")
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PublicCategoryController {
 
-    private final CategoryService categoryService;
+    CategoryService categoryService;
 
     @GetMapping
     public List<CategoryDto> getCategories(

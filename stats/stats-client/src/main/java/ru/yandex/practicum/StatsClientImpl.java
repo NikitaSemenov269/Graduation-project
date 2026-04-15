@@ -1,5 +1,7 @@
 package ru.yandex.practicum;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -23,16 +25,17 @@ import java.util.List;
 
 @Component
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatsClientImpl implements StatsClient {
 
-    private static final DateTimeFormatter DATE_FORMATTER =
+    static final DateTimeFormatter DATE_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private final RestTemplate restTemplate;
-    private final DiscoveryClient discoveryClient;
+    final RestTemplate restTemplate;
+    final DiscoveryClient discoveryClient;
 
     @Value("${stats-server.id:stats-service}")
-    private String statServiceId;
+    String statServiceId;
 
     public StatsClientImpl(RestTemplate restTemplate, DiscoveryClient discoveryClient) {
         this.restTemplate = restTemplate;

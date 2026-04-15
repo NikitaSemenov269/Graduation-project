@@ -79,7 +79,6 @@ services:
       - POSTGRES_PASSWORD=12345
     volumes:
       - stats-db-data:/var/lib/postgresql/data
-    #      - ./docker/postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh
     healthcheck:
       test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
       timeout: 5s
@@ -99,7 +98,6 @@ services:
       - POSTGRES_PASSWORD=12345
     volumes:
       - user-db-data:/var/lib/postgresql/data
-    #      - ./docker/postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh
     healthcheck:
       test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
       timeout: 5s
@@ -119,7 +117,6 @@ services:
       - POSTGRES_PASSWORD=12345
     volumes:
       - category-db-data:/var/lib/postgresql/data
-    #      - ./docker/postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh
     healthcheck:
       test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
       timeout: 5s
@@ -139,7 +136,6 @@ services:
       - POSTGRES_PASSWORD=12345
     volumes:
       - event-db-data:/var/lib/postgresql/data
-    #      - ./docker/postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh
     healthcheck:
       test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
       timeout: 5s
@@ -159,7 +155,6 @@ services:
       - POSTGRES_PASSWORD=12345
     volumes:
       - request-db-data:/var/lib/postgresql/data
-    #      - ./docker/postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh
     healthcheck:
       test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
       timeout: 5s
