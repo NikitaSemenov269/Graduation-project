@@ -1,0 +1,38 @@
+server:
+  port: ${SERVER_PORT:0}
+
+spring:
+  application:
+    name: request-service
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: config-server
+      fail-fast: true
+      retry:
+        useRandomPolicy: true
+        max-interval: 6000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname:localhost}:${eureka.instance.port:8761}/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: "${spring.application.name}:${random.value}"
+    leaseRenewalIntervalInSeconds: 10
+
+logging:
+  level:
+    org.springframework.web: TRACE
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
+    ru.yandex.request: TRACE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: mappings
