@@ -3,15 +3,15 @@ package ru.yandex.event.event.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-
+import ru.yandex.event.event.model.Event;
+import ru.yandex.event.event.model.Location;
 import ru.yandex.practicum.DTO.category.CategoryDto;
 import ru.yandex.practicum.DTO.event.EventFullDto;
 import ru.yandex.practicum.DTO.event.EventShortDto;
 import ru.yandex.practicum.DTO.event.LocationDto;
 import ru.yandex.practicum.DTO.event.NewEventDto;
 import ru.yandex.practicum.DTO.user.UserShortDto;
-import ru.yandex.event.event.model.Event;
-import ru.yandex.event.event.model.Location;
+
 
 import java.util.List;
 
@@ -24,7 +24,6 @@ public interface EventMapper {
     @Mapping(target = "initiator", ignore = true)
     @Mapping(target = "publishedOn", ignore = true)
     @Mapping(target = "state", constant = "PENDING")
-    @Mapping(target = "views", constant = "0L")
     @Mapping(target = "category", source = "category")
     Event toEntity(NewEventDto dto);
 
@@ -42,6 +41,28 @@ public interface EventMapper {
     LocationDto toLocationDto(Location location);
 
     Location toLocation(LocationDto dto);
+
+    default EventShortDto toShortDtoWithRating(Event event, Long confirmedRequests, Double rating) {
+        EventShortDto dto = toShortDto(event);
+        dto.setConfirmedRequests(confirmedRequests);
+        dto.setRating(rating != null ? rating : 0.0);
+        return dto;
+    }
+
+    default EventFullDto toFullDtoWithRating(Event event, Long confirmedRequests, Double rating) {
+        EventFullDto dto = toFullDto(event);
+        dto.setConfirmedRequests(confirmedRequests);
+        dto.setRating(rating != null ? rating : 0.0);
+
+        // Загружаем данные категории
+        if (event.getCategory() != null) {
+            dto.setCategory(CategoryDto.builder()
+                    .id(event.getCategory())
+                    .build());
+        }
+
+        return dto;
+    }
 
     @Named("mapCategoryToDto")
     default CategoryDto mapCategoryToDto(Event event) {

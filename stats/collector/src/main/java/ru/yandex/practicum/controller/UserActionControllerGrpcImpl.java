@@ -4,9 +4,7 @@ import com.google.protobuf.Empty;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import ru.yandex.practicum.ewm.grpc.stats.collector.UserActionControllerGrpc;
@@ -16,10 +14,9 @@ import ru.yandex.practicum.service.UserActionService;
 @Slf4j
 @RequiredArgsConstructor
 @GrpcService
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserActionControllerGrpcImpl extends UserActionControllerGrpc.UserActionControllerImplBase {
 
-    UserActionService userActionService;
+    private final UserActionService userActionService;
 
     @Override
     public void collectUserAction(UserActionProto request, StreamObserver<Empty> responseObserver) {

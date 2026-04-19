@@ -1,7 +1,5 @@
 package ru.yandex.practicum.serializer;
 
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
 import org.apache.avro.io.BinaryEncoder;
 import org.apache.avro.io.DatumWriter;
 import org.apache.avro.io.EncoderFactory;
@@ -13,10 +11,9 @@ import org.apache.kafka.common.serialization.Serializer;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class GeneralAvroSerializer implements Serializer<SpecificRecordBase> {
 
-    EncoderFactory encoderFactory = EncoderFactory.get();
+    private final EncoderFactory encoderFactory = EncoderFactory.get();
 
     @Override
     public byte[] serialize(String topic, SpecificRecordBase data) {

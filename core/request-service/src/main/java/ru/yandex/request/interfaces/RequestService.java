@@ -1,6 +1,5 @@
 package ru.yandex.request.interfaces;
 
-
 import ru.yandex.practicum.DTO.request.EventRequestStatusUpdateRequest;
 import ru.yandex.practicum.DTO.request.EventRequestStatusUpdateResult;
 import ru.yandex.practicum.DTO.request.ParticipationRequestDto;
@@ -24,4 +23,6 @@ public interface RequestService {
     Long getConfirmedRequests(Long eventId);
 
     Map<Long, Long> getConfirmedRequestsBatch(List<Long> eventIds);
+
+    boolean checkUserParticipated(Long userId, Long eventId);
 }

@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventFullDto {
 
@@ -40,5 +39,5 @@ public class EventFullDto {
     Boolean requestModeration;
     EventState state;
     String title;
-    Long views;
+    Double rating;
 }

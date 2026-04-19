@@ -1,8 +1,6 @@
 package ru.yandex.practicum.kafka;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -17,11 +15,10 @@ import java.util.Properties;
 @Slf4j
 @Getter
 @Configuration
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @EnableConfigurationProperties({CollectorKafkaProperties.class})
 public class KafkaConfig {
 
-    CollectorKafkaProperties collectorKafkaProperties;
+    private final CollectorKafkaProperties collectorKafkaProperties;
 
     public KafkaConfig(CollectorKafkaProperties properties) {
         this.collectorKafkaProperties = properties;

@@ -31,7 +31,6 @@ public class InternalEventController {
         log.info("GET /internal/events/{} - внутренний вызов", id);
         EventFullDto dto = eventService.getEventById(id);
 
-        // Заполните category и initiator через клиенты
         try {
             CategoryDto category = categoryClient.getCategory(dto.getCategory().getId());
             dto.setCategory(category);

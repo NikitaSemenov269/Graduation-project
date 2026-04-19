@@ -1,3 +1,4 @@
+/*
 package ru.yandex.practicum.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -13,4 +14,4 @@ public class StatsClientConfig {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-}
+}*/

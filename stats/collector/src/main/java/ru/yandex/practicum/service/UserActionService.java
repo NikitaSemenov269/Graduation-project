@@ -1,9 +1,7 @@
 package ru.yandex.practicum.service;
 
 import jakarta.annotation.PreDestroy;
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.Producer;
@@ -19,11 +17,10 @@ import java.time.Instant;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserActionService {
 
-    Producer<Long, SpecificRecordBase> producer;
-    KafkaConfig kafkaConfig;
+    private final Producer<Long, SpecificRecordBase> producer;
+    private final KafkaConfig kafkaConfig;
 
     public void collectUserAction(UserActionProto userActionProto) {
         log.info("UserActionService: обработка UserActionProto, userId={}, eventId={}",

@@ -1,8 +1,6 @@
 package ru.yandex.request.controller;
 
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.request.interfaces.RequestService;
@@ -14,10 +12,9 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/internal")
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class InternalRequestController {
 
-    RequestService requestService;
+    private final RequestService requestService;
 
     @GetMapping("/events/{eventId}/confirmed-requests")
     public Long getConfirmedRequests(@PathVariable Long eventId) {
@@ -29,5 +26,10 @@ public class InternalRequestController {
     public Map<Long, Long> getConfirmedRequestsBatch(@RequestBody List<Long> eventIds) {
         log.info("POST внутренний пакетный запрос для {} событий", eventIds.size());
         return requestService.getConfirmedRequestsBatch(eventIds);
+    }
+
+    @PostMapping("{eventId}/participant/{userId}")
+    public boolean isUserParticipant(@PathVariable Long userId, @PathVariable Long eventId) {
+        return requestService.checkUserParticipated(userId, eventId);
     }
 }
