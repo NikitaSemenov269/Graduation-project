@@ -16,10 +16,9 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class StatsController {
 
-    StatsService statsService;
+    private final StatsService statsService;
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)

@@ -24,14 +24,13 @@ import java.util.List;
 
 @Component
 @Slf4j
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class StatsClientImpl implements StatsClient {
 
-    static final DateTimeFormatter DATE_FORMATTER =
+    private static final DateTimeFormatter DATE_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    RestTemplate restTemplate;
-    DiscoveryClient discoveryClient;
+    private final RestTemplate restTemplate;
+    private final DiscoveryClient discoveryClient;
 
     @Value("${stats-server.id:stats-service}")
     private String statServiceId;
