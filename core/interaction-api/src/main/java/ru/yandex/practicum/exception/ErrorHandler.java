@@ -5,7 +5,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class ErrorHandler {
 
-    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -87,24 +86,5 @@ public class ErrorHandler {
                 .status(status.toString())
                 .timestamp(LocalDateTime.now().format(FORMATTER))
                 .build();
-    }
-
-    @ExceptionHandler(MissingServletRequestParameterException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleMissingParams(MissingServletRequestParameterException e) {
-        log.error("400: Отсутствует обязательный параметр {}", e.getParameterName());
-        return ApiError.builder()
-                .message("Обязательный параметр '" + e.getParameterName() + "' отсутствует")
-                .reason("Некорректный запрос")
-                .status(HttpStatus.BAD_REQUEST.toString())
-                .timestamp(LocalDateTime.now().format(FORMATTER))
-                .build();
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiError handleIllegalArgument(IllegalArgumentException e) {
-        log.error("400: {}", e.getMessage());
-        return buildError(e.getMessage(), "Некорректный запрос", HttpStatus.BAD_REQUEST);
     }
 }
