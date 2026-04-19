@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class AdminEventController {
 
     EventService eventService;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @GetMapping
     public List<EventFullDto> getEvents(

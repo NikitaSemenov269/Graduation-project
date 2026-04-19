@@ -25,8 +25,9 @@ import java.util.List;
 @RequestMapping("/events")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class PublicEventController {
+
     EventService eventService;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @GetMapping("/by-ids")
     public List<EventFullDto> getEventsByIds(@RequestParam("ids") List<Long> ids) {

@@ -1,7 +1,9 @@
 package ru.yandex.practicum.controller;
 
 import jakarta.validation.Valid;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,10 @@ import ru.yandex.practicum.service.CategoryService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin/categories")
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AdminCategoryController {
 
-    private final CategoryService categoryService;
+    CategoryService categoryService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
