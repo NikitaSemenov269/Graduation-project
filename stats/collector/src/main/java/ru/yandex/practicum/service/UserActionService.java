@@ -1,7 +1,9 @@
 package ru.yandex.practicum.service;
 
 import jakarta.annotation.PreDestroy;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.Producer;
@@ -17,10 +19,11 @@ import java.time.Instant;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserActionService {
 
-    private final Producer<Long, SpecificRecordBase> producer;
-    private final KafkaConfig kafkaConfig;
+    Producer<Long, SpecificRecordBase> producer;
+    KafkaConfig kafkaConfig;
 
     public void collectUserAction(UserActionProto userActionProto) {
         log.info("UserActionService: обработка UserActionProto, userId={}, eventId={}",
@@ -33,9 +36,9 @@ public class UserActionService {
                     .setEventId(userActionProto.getEventId())
                     .setActionType(toActionTypeAvro(userActionProto))
                     .setTimestamp(Instant.ofEpochSecond(
-                            userActionProto.getTimestamp().getSeconds(),
-                            userActionProto.getTimestamp().getNanos()
-                    )
+                                    userActionProto.getTimestamp().getSeconds(),
+                                    userActionProto.getTimestamp().getNanos()
+                            )
                     )
                     .build();
 

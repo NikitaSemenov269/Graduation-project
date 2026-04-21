@@ -1,7 +1,9 @@
 package ru.yandex.practicum.consumer;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -12,12 +14,13 @@ import java.util.Properties;
 @Getter
 @Setter
 @Component
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @ConfigurationProperties(prefix = "analyzer.kafka")
 public class KafkaConsumerConfig {
-    private Properties userActionConsumerProps;
-    private Properties eventSimilarityConsumerProps;
-    private String userActionsTopic;
-    private String eventsSimilarityTopic;
+    Properties userActionConsumerProps;
+    Properties eventSimilarityConsumerProps;
+    String userActionsTopic;
+    String eventsSimilarityTopic;
 
     public void logConfig() {
         log.info("=== КОНФИГУРАЦИЯ KAFKA ===");

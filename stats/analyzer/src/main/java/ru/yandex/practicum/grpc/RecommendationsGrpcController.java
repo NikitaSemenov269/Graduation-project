@@ -1,7 +1,9 @@
 package ru.yandex.practicum.grpc;
 
 import io.grpc.stub.StreamObserver;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import ru.yandex.practicum.ewm.grpc.stats.dashboard.RecommendationsControllerGrpc;
@@ -16,10 +18,11 @@ import java.util.List;
 @Slf4j
 @GrpcService
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RecommendationsGrpcController
         extends RecommendationsControllerGrpc.RecommendationsControllerImplBase {
 
-    private final RecommendationService recommendationService;
+    RecommendationService recommendationService;
 
     @Override
     public void getSimilarEvents(SimilarEventsRequestProto request,

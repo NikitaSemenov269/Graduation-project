@@ -1,6 +1,8 @@
 package ru.yandex.practicum.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RecommendationServiceImpl implements RecommendationService {
 
-    private final UserEventInteractionRepository interactionRepository;
-    private final EventSimilarityRepository similarityRepository;
+    UserEventInteractionRepository interactionRepository;
+    EventSimilarityRepository similarityRepository;
 
     private static final int RECENT_INTERACTIONS_LIMIT = 20;
     private static final int NEIGHBORS_COUNT = 10;

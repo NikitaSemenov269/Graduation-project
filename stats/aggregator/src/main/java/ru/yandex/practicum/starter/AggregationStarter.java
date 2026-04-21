@@ -1,5 +1,7 @@
 package ru.yandex.practicum.starter;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.*;
@@ -20,13 +22,15 @@ import java.util.Map;
 
 @Slf4j
 @Component
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AggregationStarter {
 
     private static final Map<TopicPartition, OffsetAndMetadata> currentOffsets = new HashMap<>();
-    private final AggregatorService aggregatorService;
-    private final KafkaProducer<Long, SpecificRecordBase> producer;
-    private final KafkaConsumer<Long, UserActionAvro> consumer;
-    private final AggregatorKafkaProperties kafkaConfig;
+
+    AggregatorService aggregatorService;
+    KafkaProducer<Long, SpecificRecordBase> producer;
+    KafkaConsumer<Long, UserActionAvro> consumer;
+    AggregatorKafkaProperties kafkaConfig;
 
     public AggregationStarter(AggregatorService aggregatorService, AggregatorKafkaProperties kafkaConfig) {
         this.aggregatorService = aggregatorService;

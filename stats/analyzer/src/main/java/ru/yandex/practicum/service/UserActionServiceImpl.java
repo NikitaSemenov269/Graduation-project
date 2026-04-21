@@ -1,6 +1,8 @@
 package ru.yandex.practicum.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +15,10 @@ import java.time.Instant;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserActionServiceImpl implements UserActionService {
 
-    private final UserEventInteractionRepository repository;
+    UserEventInteractionRepository repository;
 
     @Override
     @Transactional

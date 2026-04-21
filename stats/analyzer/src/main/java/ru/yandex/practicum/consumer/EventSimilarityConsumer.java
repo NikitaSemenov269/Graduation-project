@@ -1,5 +1,7 @@
 package ru.yandex.practicum.consumer;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -16,11 +18,12 @@ import java.util.List;
 
 @Slf4j
 @Component
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventSimilarityConsumer implements Runnable {
-    private final KafkaConsumer<Long, EventSimilarityAvro> consumer;
-    private final EventSimilarityService similarityService;
-    private final KafkaConsumerConfig kafkaConfig;
-    private Thread consumerThread;
+    final KafkaConsumer<Long, EventSimilarityAvro> consumer;
+    final EventSimilarityService similarityService;
+    final KafkaConsumerConfig kafkaConfig;
+    Thread consumerThread;
 
     public EventSimilarityConsumer(KafkaConsumerConfig kafkaConfig, EventSimilarityService similarityService) {
         this.kafkaConfig = kafkaConfig;

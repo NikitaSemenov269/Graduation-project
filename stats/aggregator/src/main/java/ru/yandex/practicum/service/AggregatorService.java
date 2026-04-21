@@ -1,6 +1,8 @@
 package ru.yandex.practicum.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.ewm.stats.avro.ActionTypeAvro;
@@ -14,13 +16,14 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AggregatorService {
 
-    private final Map<Long, Map<Long, Double>> weightsStorage = new ConcurrentHashMap<>();
+    Map<Long, Map<Long, Double>> weightsStorage = new ConcurrentHashMap<>();
 
-    private final Map<Long, Double> sumsStorage = new ConcurrentHashMap<>();
+    Map<Long, Double> sumsStorage = new ConcurrentHashMap<>();
 
-    private final Map<String, Double> minsStorage = new ConcurrentHashMap<>();
+    Map<String, Double> minsStorage = new ConcurrentHashMap<>();
 
     public List<EventSimilarityAvro> updateSimilarity(UserActionAvro action) {
         Long userId = action.getUserId();
