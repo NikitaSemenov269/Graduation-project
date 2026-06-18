@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.yandex.practicum.DTO.stats.EndpointHitDto;
-import ru.yandex.practicum.DTO.stats.ViewStatsDto;
+import ru.yandex.practicum.dto.stats.EndpointHitDto;
+import ru.yandex.practicum.dto.stats.ViewStatsDto;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

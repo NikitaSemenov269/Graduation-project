@@ -23,12 +23,3 @@ eureka:
   instance:
     preferIpAddress: true
     hostname: gateway-server
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    gateway:
-      enabled: true
